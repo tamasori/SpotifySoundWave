@@ -4,9 +4,36 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Spotify_SWandCP"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
         
+        mc:Ignorable="d"
+        Title="Spotify CP and SW" Height="200" Width="1288.4" Topmost="True" Cursor="Arrow" AllowsTransparency="True" WindowStyle="None" Background="#66000000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*" ></RowDefinition>
+            <RowDefinition Height="50" ></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+            <ColumnDefinition Width="*" ></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Button Grid.Row="1" Grid.ColumnSpan="1" Content="/\" FontSize="25"></Button>
+        <local:Spectrum x:Name="spek"  Grid.ColumnSpan="12" Margin="0,-10,2,10" Grid.RowSpan="1"></local:Spectrum>
+        <ComboBox x:Name="comboBox" Grid.ColumnSpan="2" Grid.Column="1" HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Top" />
+        <ProgressBar x:Name="leftC" Grid.ColumnSpan="3" Grid.Column="5" HorizontalAlignment="Left" Height="21" Margin="79,9.6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="141"/>
+        <ProgressBar x:Name="rightC" Grid.ColumnSpan="2" Grid.Column="7" HorizontalAlignment="Left" Height="21" Margin="15.6,9.6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="141"/>
+        <Expander x:Name="expander" Grid.ColumnSpan="12" Header="Expander" Grid.RowSpan="2">
+            <Grid Background="#FFE5E5E5"/>
+        </Expander>
+
     </Grid>
 </Window>
