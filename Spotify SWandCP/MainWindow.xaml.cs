@@ -18,6 +18,9 @@ using System.Drawing;
 using Un4seen.Bass;
 using Un4seen.BassWasapi;
 using System.Windows.Threading;
+using SpotifyAPI.Local;
+using SpotifyAPI.Local.Enums;
+using SpotifyAPI.Local.Models;
 
 namespace Spotify_SWandCP
 {
@@ -26,6 +29,7 @@ namespace Spotify_SWandCP
     /// </summary>
     public partial class MainWindow : Window
     {
+        SpotifyLocalAPI _spotify;
         public MainWindow()
         {
             InitializeComponent();
@@ -33,7 +37,31 @@ namespace Spotify_SWandCP
             analyzer = new Analyzer(leftC, rightC, spek, comboBox);
             analyzer.Enable = true;
             analyzer.DisplayEnable = true;
+            _spotify = new SpotifyLocalAPI();
+            if (!SpotifyLocalAPI.IsSpotifyRunning())
+                SpotifyLocalAPI.RunSpotify();
+            if (!SpotifyLocalAPI.IsSpotifyWebHelperRunning())
+                SpotifyLocalAPI.RunSpotifyWebHelper();
+
+            if (!_spotify.Connect())
+                return; //We need to call Connect before fetching infos, this will handle Auth stuff
+
+            StatusResponse status = _spotify.GetStatus(); //status contains infos
+            _spotify.OnTrackChange += _spotify_OnTrackChange;
         }
+
+        private void _spotify_OnTrackChange(object sender, TrackChangeEventArgs e)
+        {
+            
+            cover.Source = BitmapToImageSource(e.NewTrack.GetAlbumArt(AlbumArtSize.Size320));
+            MessageBox.Show(cover.Source.Metadata.ToString());
+        }
+        ImageSource BitmapToImageSource(Bitmap bitmap)
+        {
+            ImageSourceConverter c = new ImageSourceConverter();
+            return (ImageSource)c.ConvertFrom(bitmap);
+        }
+
         Analyzer analyzer;
     }
     internal class Analyzer
@@ -45,23 +73,23 @@ namespace Spotify_SWandCP
         private WASAPIPROC _process;        //callback function to obtain data
         private int _lastlevel;             //last output level
         private int _hanctr;                //last output level counter
-        public List<byte> _spectrumdata;   //spectrum data buffer
-        private Spectrum _spectrum;         //spectrum dispay control
+        public byte[] _spectrumdata;   //spectrum data buffer
+        private Spectrum2 _spectrum;         //spectrum dispay control
         private ComboBox _devicelist;       //device list
         private bool _initialized;          //initialized flag
         private int devindex;               //used device index
 
-        private int _lines = 16;            // number of spectrum lines
+        private int _lines = 64;            // number of spectrum lines
 
         //ctor
-        public Analyzer(ProgressBar left, ProgressBar right, Spectrum spectrum, ComboBox devicelist)
+        public Analyzer(ProgressBar left, ProgressBar right, Spectrum2 spectrum, ComboBox devicelist)
         {
             _fft = new float[8192];
             _lastlevel = 0;
             _hanctr = 0;
             _t = new DispatcherTimer();
             _t.Tick += _t_Tick;
-            _t.Interval = TimeSpan.FromMilliseconds(10); //40hz refresh rate//25
+            _t.Interval = TimeSpan.FromMilliseconds(25); //40hz refresh rate//25
             _t.IsEnabled = false;
             _l = left;
             _r = right;
@@ -70,7 +98,7 @@ namespace Spotify_SWandCP
             _r.Maximum = (ushort.MaxValue);
             _l.Maximum = (ushort.MaxValue);
             _process = new WASAPIPROC(Process);
-            _spectrumdata = new List<byte>();
+            _spectrumdata = new byte[_lines];
             _spectrum = spectrum;
             _devicelist = devicelist;
             _initialized = false;
@@ -136,7 +164,7 @@ namespace Spotify_SWandCP
         }
 
         //timer 
-        private void _t_Tick(object sender, EventArgs e)
+        private async void _t_Tick(object sender, EventArgs e)
         {
             int ret = BassWasapi.BASS_WASAPI_GetData(_fft, (int)BASSData.BASS_DATA_FFT8192);  //get ch.annel fft data
             if (ret < -1) return;
@@ -157,12 +185,11 @@ namespace Spotify_SWandCP
                 y = (int)(Math.Sqrt(peak) * 3 * 255 - 4);
                 if (y > 255) y = 255;
                 if (y < 0) y = 0;
-                _spectrumdata.Add((byte)y);
+                _spectrumdata[x] = (byte)y;
                 //Console.Write("{0, 3} ", y);
             }
 
-            if (DisplayEnable) _spectrum.Set(_spectrumdata);
-            _spectrumdata.Clear();
+            if (DisplayEnable) await _spectrum.Set(_spectrumdata);
 
 
             int level = BassWasapi.BASS_WASAPI_GetLevel();

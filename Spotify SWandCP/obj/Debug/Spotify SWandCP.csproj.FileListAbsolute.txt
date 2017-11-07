@@ -1,0 +1,19 @@
+C:\Users\ori.tamas\Source\Repos\SpotifySoundWave\Spotify SWandCP\obj\Debug\UserControl1.baml
+C:\Users\ori.tamas\Source\Repos\SpotifySoundWave\Spotify SWandCP\obj\Debug\UserControl1.g.cs
+C:\Users\ori.tamas\Source\Repos\SpotifySoundWave\Spotify SWandCP\obj\Debug\Spotify SWandCP_MarkupCompile.cache
+C:\Users\ori.tamas\Source\Repos\SpotifySoundWave\Spotify SWandCP\obj\Debug\Spotify SWandCP_MarkupCompile.lref
+C:\Users\ori.tamas\Source\Repos\SpotifySoundWave\Spotify SWandCP\bin\Debug\Spotify SWandCP.exe.config
+C:\Users\ori.tamas\Source\Repos\SpotifySoundWave\Spotify SWandCP\bin\Debug\Spotify SWandCP.exe
+C:\Users\ori.tamas\Source\Repos\SpotifySoundWave\Spotify SWandCP\bin\Debug\Spotify SWandCP.pdb
+C:\Users\ori.tamas\Source\Repos\SpotifySoundWave\Spotify SWandCP\obj\Debug\MainWindow.g.cs
+C:\Users\ori.tamas\Source\Repos\SpotifySoundWave\Spotify SWandCP\obj\Debug\App.g.cs
+C:\Users\ori.tamas\Source\Repos\SpotifySoundWave\Spotify SWandCP\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\ori.tamas\Source\Repos\SpotifySoundWave\Spotify SWandCP\obj\Debug\MainWindow.baml
+C:\Users\ori.tamas\Source\Repos\SpotifySoundWave\Spotify SWandCP\obj\Debug\Spotify SWandCP.g.resources
+C:\Users\ori.tamas\Source\Repos\SpotifySoundWave\Spotify SWandCP\obj\Debug\Spotify_SWandCP.Properties.Resources.resources
+C:\Users\ori.tamas\Source\Repos\SpotifySoundWave\Spotify SWandCP\obj\Debug\Spotify SWandCP.csproj.GenerateResource.Cache
+C:\Users\ori.tamas\Source\Repos\SpotifySoundWave\Spotify SWandCP\obj\Debug\Spotify SWandCP.exe
+C:\Users\ori.tamas\Source\Repos\SpotifySoundWave\Spotify SWandCP\obj\Debug\Spotify SWandCP.pdb
+C:\Users\ori.tamas\Source\Repos\SpotifySoundWave\Spotify SWandCP\obj\Debug\Spectrum2.baml
+C:\Users\ori.tamas\Source\Repos\SpotifySoundWave\Spotify SWandCP\obj\Debug\Spectrum2.g.cs
+C:\Users\ori.tamas\Source\Repos\SpotifySoundWave\Spotify SWandCP\obj\Debug\Spotify SWandCP.csprojResolveAssemblyReference.cache
